@@ -1,0 +1,6 @@
+C:\Users\aselab\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll.config
+C:\Users\aselab\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll
+C:\Users\aselab\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.pdb
+C:\Users\aselab\Developer\CPSC683\CPSC683DataLibrary\CPSC683DataLibrary\obj\Debug\DataLibrary.csprojResolveAssemblyReference.cache
+C:\Users\aselab\Developer\CPSC683\CPSC683DataLibrary\CPSC683DataLibrary\obj\Debug\CPSC683DataLibrary.dll
+C:\Users\aselab\Developer\CPSC683\CPSC683DataLibrary\CPSC683DataLibrary\obj\Debug\CPSC683DataLibrary.pdb
