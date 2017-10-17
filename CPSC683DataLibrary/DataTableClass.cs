@@ -129,7 +129,7 @@ namespace DataLibrary
             return (float)table.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
         }
 
-        public string CreateStringForFilterByString(string columnName, string columnValue)
+        public string FilterByString(string columnName, string columnValue)
         {
             return columnName.Replace(' ', '_') + " = \'" + columnValue + "\'";
         }
