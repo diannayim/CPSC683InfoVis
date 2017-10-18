@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CPSC683DataLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,6 +20,8 @@ namespace DataLibrary
         {
             table = new DataTable("DataTable");
 
+            int id = 0;
+
             foreach (string line in File.ReadLines(pathName))
             {
                 if (table.Columns.Count == 0)
@@ -33,6 +36,9 @@ namespace DataLibrary
 
                         switch (s)
                         {
+                            case "id":
+                                dc.DataType = typeof(int);
+                                break;
                             case "User country":
                             case "Period of stay":
                             case "Hotel name":
@@ -58,6 +64,9 @@ namespace DataLibrary
                             case "Free internet":
                                 dc.DataType = typeof(bool);
                                 break;
+                            case "Traveler type":
+                                dc.DataType = typeof(TravelerType);
+                                break;
                             default:
                                 dc.DataType = typeof(string);
                                 break;
@@ -71,6 +80,9 @@ namespace DataLibrary
                 {
                     DataRow row = table.NewRow();
 
+                    row["id"] = id;
+                    id += 1;
+
                     string[] split = line.Split(',');
 
                     for (int i = 0; i < split.Length; i++)
@@ -81,6 +93,11 @@ namespace DataLibrary
                                 row[table.Columns[i].ColumnName] = true;
                             else
                                 row[table.Columns[i].ColumnName] = false;
+                        }
+
+                        else if (table.Columns[i].DataType == typeof(TravelerType))
+                        {
+                            row[table.Columns[i].ColumnName] = Enum.Parse(typeof(TravelerType), split[i]);
                         }
 
                         else
@@ -105,12 +122,6 @@ namespace DataLibrary
             return JsonConvert.SerializeObject(t);
         }
 
-        public string ReturnRowByIndex(int index)
-        {
-            var row = table.Rows[index];
-            return JsonConvert.SerializeObject(row);
-        }
-
         #endregion
 
         public int GetNumberOfEntriesWithColumnValue(string filter)
@@ -129,7 +140,7 @@ namespace DataLibrary
             return (float)table.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
         }
 
-        public string CreateStringForFilterByString(string columnName, string columnValue)
+        public string FilterByString(string columnName, string columnValue)
         {
             return columnName.Replace(' ', '_') + " = \'" + columnValue + "\'";
         }
