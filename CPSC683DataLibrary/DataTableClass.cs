@@ -27,7 +27,7 @@ namespace DataLibrary
                 if (table.Columns.Count == 0)
                 {
                     string[] split = line.Split(',');
-
+                    
                     foreach (string s in split)
                     {
                         DataColumn dc = new DataColumn();
@@ -36,9 +36,6 @@ namespace DataLibrary
 
                         switch (s)
                         {
-                            case "id":
-                                dc.DataType = typeof(int);
-                                break;
                             case "User country":
                             case "Period of stay":
                             case "Hotel name":
@@ -79,10 +76,6 @@ namespace DataLibrary
                 else
                 {
                     DataRow row = table.NewRow();
-
-                    row["id"] = id;
-                    id += 1;
-
                     string[] split = line.Split(',');
 
                     for (int i = 0; i < split.Length; i++)
@@ -144,10 +137,19 @@ namespace DataLibrary
         {
             return columnName.Replace(' ', '_') + " = \'" + columnValue + "\'";
         }
-
+        
         public List<string> GetUniqueValuesForColumn(string columnName)
         {
             DataView view = new DataView(table);
+            DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
+
+            return distinctValues.AsEnumerable().Select(r => r[columnName.Replace(' ', '_')].ToString()).ToList();
+        }
+
+        public List<string> GetUniqueValuesForColumn(string columnName, string filter)
+        {
+            var filteredRows = table.Select(filter);
+            DataView view = new DataView(filteredRows.CopyToDataTable());
             DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
 
             return distinctValues.AsEnumerable().Select(r => r[columnName.Replace(' ', '_')].ToString()).ToList();
