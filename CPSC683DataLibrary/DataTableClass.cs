@@ -12,19 +12,18 @@ namespace DataLibrary
 {
     public class DataTableClass
     {
-        private DataTable table;
+        private DataTable originalTable;
+        private DataTable filteredTable;
         public List<string> columnNames = new List<string>();
 
         #region Creation
         public void WriteToTable(string pathName)
         {
-            table = new DataTable("DataTable");
-
-            int id = 0;
-
+            originalTable = new DataTable("DataTable");
+            
             foreach (string line in File.ReadLines(pathName))
             {
-                if (table.Columns.Count == 0)
+                if (originalTable.Columns.Count == 0)
                 {
                     string[] split = line.Split(',');
                     
@@ -69,45 +68,47 @@ namespace DataLibrary
                                 break;
                         }
 
-                        table.Columns.Add(dc);
+                        originalTable.Columns.Add(dc);
                     }
                 }
 
                 else
                 {
-                    DataRow row = table.NewRow();
+                    DataRow row = originalTable.NewRow();
                     string[] split = line.Split(',');
 
                     for (int i = 0; i < split.Length; i++)
                     {
-                        if (table.Columns[i].DataType == typeof(bool))
+                        if (originalTable.Columns[i].DataType == typeof(bool))
                         {
                             if (split[i] == "YES")
-                                row[table.Columns[i].ColumnName] = true;
+                                row[originalTable.Columns[i].ColumnName] = true;
                             else
-                                row[table.Columns[i].ColumnName] = false;
+                                row[originalTable.Columns[i].ColumnName] = false;
                         }
 
-                        else if (table.Columns[i].DataType == typeof(TravelerType))
+                        else if (originalTable.Columns[i].DataType == typeof(TravelerType))
                         {
-                            row[table.Columns[i].ColumnName] = Enum.Parse(typeof(TravelerType), split[i]);
+                            row[originalTable.Columns[i].ColumnName] = Enum.Parse(typeof(TravelerType), split[i]);
                         }
 
                         else
                         {
-                            row[table.Columns[i].ColumnName] = split[i];
+                            row[originalTable.Columns[i].ColumnName] = split[i];
                         }
                     }
-                    table.Rows.Add(row);
+                    originalTable.Rows.Add(row);
                 }
             }
+
+            filteredTable = originalTable;
         }
         #endregion
 
         #region Return To Unity
         public string ReturnJsonTable()
         {
-            return JsonConvert.SerializeObject(table);
+            return JsonConvert.SerializeObject(originalTable);
         }
 
         public string ReturnJsonTable(DataTable t)
@@ -119,28 +120,28 @@ namespace DataLibrary
 
         public int GetNumberOfEntriesWithColumnValue(string filter)
         {
-            return table.Select(filter).Length;
+            return filteredTable.Select(filter).Length;
         }
 
         public string GetRowsWithFilter(string filter)
         {
-            var filteredRows = table.Select(filter);
+            var filteredRows = originalTable.Select(filter);
             return ReturnJsonTable(filteredRows.CopyToDataTable());
         }
 
         public float GetAverageValue(string columnName, string filter)
         {
-            return (float)table.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
+            return (float)originalTable.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
         }
 
-        public string FilterByString(string columnName, string columnValue)
+        public string FilterByString(string columnName, string operation, string columnValue)
         {
-            return columnName.Replace(' ', '_') + " = \'" + columnValue + "\'";
+            return columnName.Replace(' ', '_') + " " + operation + " \'" + columnValue + "\'";
         }
         
         public List<string> GetUniqueValuesForColumn(string columnName)
         {
-            DataView view = new DataView(table);
+            DataView view = new DataView(originalTable);
             DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
 
             return distinctValues.AsEnumerable().Select(r => r[columnName.Replace(' ', '_')].ToString()).ToList();
@@ -148,7 +149,7 @@ namespace DataLibrary
 
         public List<string> GetUniqueValuesForColumn(string columnName, string filter)
         {
-            var filteredRows = table.Select(filter);
+            var filteredRows = originalTable.Select(filter);
             DataView view = new DataView(filteredRows.CopyToDataTable());
             DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
 
