@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CubeModelCreation.cs" />
     <Compile Include="CustomClasses.cs" />
     <Compile Include="DataTableClass.cs" />
     <Compile Include="HelperFunctions.cs" />
