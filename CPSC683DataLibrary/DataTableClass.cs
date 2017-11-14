@@ -1,4 +1,4 @@
-﻿using CPSC683DataLibrary;
+﻿using DataLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,13 +10,25 @@ using System.Threading.Tasks;
 
 namespace DataLibrary
 {
+    /// <summary>
+    /// DataTableClass for storing data information
+    /// </summary>
     public class DataTableClass
     {
         private DataTable originalTable;
         private DataTable filteredTable;
+
+        /// <summary>
+        /// Column Names for dataset
+        /// </summary>
         public List<string> columnNames = new List<string>();
 
         #region Creation
+
+        /// <summary>
+        /// Parses file at path into datatable object
+        /// </summary>
+        /// <param name="pathName">Path to file</param>
         public void WriteToTable(string pathName)
         {
             originalTable = new DataTable("DataTable");
@@ -41,6 +53,7 @@ namespace DataLibrary
                             case "User continent":
                             case "Review month":
                             case "Review weekday":
+                            case "Traveler type":
                                 dc.DataType = typeof(string);
                                 break;
                             case "Nr. reviews":
@@ -59,9 +72,6 @@ namespace DataLibrary
                             case "Casino":
                             case "Free internet":
                                 dc.DataType = typeof(bool);
-                                break;
-                            case "Traveler type":
-                                dc.DataType = typeof(TravelerType);
                                 break;
                             default:
                                 dc.DataType = typeof(string);
@@ -87,11 +97,6 @@ namespace DataLibrary
                                 row[originalTable.Columns[i].ColumnName] = false;
                         }
 
-                        else if (originalTable.Columns[i].DataType == typeof(TravelerType))
-                        {
-                            row[originalTable.Columns[i].ColumnName] = Enum.Parse(typeof(TravelerType), split[i]);
-                        }
-
                         else
                         {
                             row[originalTable.Columns[i].ColumnName] = split[i];
@@ -106,11 +111,21 @@ namespace DataLibrary
         #endregion
 
         #region Return To Unity
+
+        /// <summary>
+        /// Returns original table in JSON format
+        /// </summary>
+        /// <returns>JSON Table</returns>
         public string ReturnJsonTable()
         {
             return JsonConvert.SerializeObject(originalTable);
         }
 
+        /// <summary>
+        /// Returns passed in table in JSON format
+        /// </summary>
+        /// <param name="t">DataTable to be converted into JSON</param>
+        /// <returns>JSON of DataTable</returns>
         public string ReturnJsonTable(DataTable t)
         {
             return JsonConvert.SerializeObject(t);
@@ -118,6 +133,11 @@ namespace DataLibrary
 
         #endregion
 
+        /// <summary>
+        /// Get number of entries for a filter
+        /// </summary>
+        /// <param name="filter">Filter (if required) for the number of elements to return</param>
+        /// <returns>Number of entries within filtered datatable</returns>
         public int GetNumberOfEntriesWithColumnValue(string filter)
         {
             return filteredTable.Select(filter).Length;

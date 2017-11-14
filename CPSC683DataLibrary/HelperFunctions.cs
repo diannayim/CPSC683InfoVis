@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CPSC683DataLibrary
+namespace DataLibrary
 {
     public static class HelperFunctions
     {
@@ -44,6 +44,11 @@ namespace CPSC683DataLibrary
             }
 
             return new float[] { x, y, z };
+        }
+
+        public static string FilterByString(string columnName, string operation, string columnValue)
+        {
+            return columnName.Replace(' ', '_') + " " + operation + " \'" + columnValue + "\'";
         }
     }
 }
