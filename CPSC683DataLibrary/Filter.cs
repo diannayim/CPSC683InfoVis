@@ -98,14 +98,19 @@ namespace DataLibrary
             string firstKey = dictionary.Keys.ToArray()[0];
             StringBuilder sb = new StringBuilder(HelperFunctions.FilterByString(firstKey, dictionary[firstKey][0].stringFilterTerm, dictionary[firstKey][0].valueToFilterOn));
 
-            foreach(string s in dictionary.Keys)
+            foreach (string s in dictionary.Keys)
             {
                 foreach (FilterObject j in dictionary[s].Skip(1))
-                    sb.Append(" And " + HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
+                    sb.Append(" or " + HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
 
             }
 
             return sb.ToString();
+        }
+
+        public static void SetFilterObjectsByColumn(string columnName, List<FilterObject> fol)
+        {
+            dictionary[columnName.Replace(' ', '_')] = fol;
         }
 
         public static bool ReturnAllFilterValuesForColumn(string columnName, out List<string> list)
@@ -122,7 +127,7 @@ namespace DataLibrary
 
             else
                 return false;
-                
+
         }
     }
 }

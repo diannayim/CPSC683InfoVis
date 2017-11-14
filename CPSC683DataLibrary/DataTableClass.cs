@@ -32,16 +32,21 @@ namespace DataLibrary
         public void WriteToTable(string pathName)
         {
             originalTable = new DataTable("DataTable");
-            
+
             foreach (string line in File.ReadLines(pathName))
             {
                 if (originalTable.Columns.Count == 0)
                 {
                     string[] split = line.Split(',');
-                    
+                    DataColumn dc = new DataColumn();
+                    dc.ColumnName = "id";
+                    dc.AutoIncrement = true;
+                    columnNames.Add("id");
+                    originalTable.Columns.Add(dc);
+
                     foreach (string s in split)
                     {
-                        DataColumn dc = new DataColumn();
+                        dc = new DataColumn();
                         dc.ColumnName = s.Replace(' ', '_');
                         columnNames.Add(s);
 
@@ -89,17 +94,17 @@ namespace DataLibrary
 
                     for (int i = 0; i < split.Length; i++)
                     {
-                        if (originalTable.Columns[i].DataType == typeof(bool))
+                        if (originalTable.Columns[i + 1].DataType == typeof(bool))
                         {
                             if (split[i] == "YES")
-                                row[originalTable.Columns[i].ColumnName] = true;
+                                row[originalTable.Columns[i + 1].ColumnName] = true;
                             else
-                                row[originalTable.Columns[i].ColumnName] = false;
+                                row[originalTable.Columns[i + 1].ColumnName] = false;
                         }
 
                         else
                         {
-                            row[originalTable.Columns[i].ColumnName] = split[i];
+                            row[originalTable.Columns[i + 1].ColumnName] = split[i];
                         }
                     }
                     originalTable.Rows.Add(row);
@@ -154,11 +159,6 @@ namespace DataLibrary
             return (float)originalTable.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
         }
 
-        public string FilterByString(string columnName, string operation, string columnValue)
-        {
-            return columnName.Replace(' ', '_') + " " + operation + " \'" + columnValue + "\'";
-        }
-        
         public List<string> GetUniqueValuesForColumn(string columnName)
         {
             DataView view = new DataView(originalTable);
