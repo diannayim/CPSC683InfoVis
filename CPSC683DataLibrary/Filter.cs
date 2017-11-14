@@ -93,16 +93,19 @@ namespace DataLibrary
             dictionary[split[0]].Add(fo);
         }
 
-        public static string ConvertFilterDictionaryToString()
+        public static string ConvertFilterDictionaryToString(string orAnd)
         {
             string firstKey = dictionary.Keys.ToArray()[0];
+
+            if (dictionary[firstKey].Count == 0)
+                return "";
+
             StringBuilder sb = new StringBuilder(HelperFunctions.FilterByString(firstKey, dictionary[firstKey][0].stringFilterTerm, dictionary[firstKey][0].valueToFilterOn));
 
             foreach (string s in dictionary.Keys)
             {
                 foreach (FilterObject j in dictionary[s].Skip(1))
-                    sb.Append(" or " + HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
-
+                    sb.Append(" " + orAnd + " " + HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
             }
 
             return sb.ToString();

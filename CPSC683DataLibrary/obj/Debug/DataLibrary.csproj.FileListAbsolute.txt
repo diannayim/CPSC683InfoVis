@@ -10,3 +10,10 @@ D:\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\CPSC683DataLibr
 D:\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll.config
 D:\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll
 D:\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\CPSC683DataLibrary.dll
+C:\Users\Dianna\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll.config
+C:\Users\Dianna\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.dll
+C:\Users\Dianna\Developer\CPSC683\Assets\Libraries\CPSC683DataLibrary.pdb
+C:\Users\Dianna\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\DataLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Dianna\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Dianna\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\CPSC683DataLibrary.dll
+C:\Users\Dianna\Developer\CPSC683\CPSC683InfoVis\CPSC683DataLibrary\obj\Debug\CPSC683DataLibrary.pdb

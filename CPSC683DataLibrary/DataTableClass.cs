@@ -154,6 +154,16 @@ namespace DataLibrary
             return ReturnJsonTable(filteredRows.CopyToDataTable());
         }
 
+        public string GetRowsWithoutFilter(string filter)
+        {
+            var filteredRows = originalTable.Select(filter.Replace("=", "<>"));
+
+            if (filteredRows.Length == 0)
+                return null;
+
+            return ReturnJsonTable(filteredRows.CopyToDataTable());
+        }
+
         public float GetAverageValue(string columnName, string filter)
         {
             return (float)originalTable.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
