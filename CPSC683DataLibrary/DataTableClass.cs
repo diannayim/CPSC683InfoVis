@@ -150,6 +150,9 @@ namespace DataLibrary
 
         public string GetRowsWithFilter(string filter)
         {
+            if (filter == null)
+                return "";
+
             var filteredRows = originalTable.Select(filter);
             return ReturnJsonTable(filteredRows.CopyToDataTable());
         }
