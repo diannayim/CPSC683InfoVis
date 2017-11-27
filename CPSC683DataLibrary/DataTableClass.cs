@@ -22,6 +22,45 @@ namespace DataLibrary
         /// Column Names for dataset
         /// </summary>
         public List<string> columnNames = new List<string>();
+        public int numOfEntries
+        {
+            get
+            {
+                return originalTable.Rows.Count;
+            }
+        }
+
+        public List<string> dimensionNames
+        {
+            get
+            {
+                List<string> t = new List<string>();
+
+                foreach(DataColumn c in originalTable.Columns)
+                {
+                    if (c.DataType == typeof(string))
+                        t.Add(c.ColumnName);
+                }
+
+                return t;
+            }
+        }
+
+        public List<string> measureNames
+        {
+            get
+            {
+                List<string> t = new List<string>();
+
+                foreach (DataColumn c in originalTable.Columns)
+                {
+                    if (c.DataType == typeof(float))
+                        t.Add(c.ColumnName);
+                }
+
+                return t;
+            }
+        }
 
         #region Creation
 

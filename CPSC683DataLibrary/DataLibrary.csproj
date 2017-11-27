@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorBrewer.cs" />
     <Compile Include="DataTableClass.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="HelperFunctions.cs" />
