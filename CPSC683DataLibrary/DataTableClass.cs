@@ -196,6 +196,16 @@ namespace DataLibrary
             return ReturnJsonTable(filteredRows.CopyToDataTable());
         }
 
+        public string GetIDWithFilter(string filter)
+        {
+            if (filter == null)
+                return "";
+
+            DataTable filteredRows = originalTable.Select(filter).CopyToDataTable();
+            DataTable dt = new DataView(filteredRows).ToTable(false, new string[] { "id" });
+            return ReturnJsonTable(dt);
+        }
+
         public float GetAverageValue(string columnName, string filter)
         {
             return (float)originalTable.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);

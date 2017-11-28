@@ -13,11 +13,6 @@ namespace CPSC683DataLibrary
     public enum ColorSchemeType
     {
         /// <summary>
-        /// Used for distinct coloring
-        /// Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3
-        /// </summary>
-        Categorical,
-        /// <summary>
         /// Diverges from specific color to white to another color
         /// BrBG, PRGn, PiYG, PuOr, RdBu, RdGy, RdYlBu, RdYlGn, Spectral
         /// </summary>
@@ -31,7 +26,12 @@ namespace CPSC683DataLibrary
         /// Multi color spectrums
         /// BuGn, BuPn, GnBu, OrRd, PuBuGn, PuBu, PuRd, RdPu, YlGnBu, YlGn, YlOrBr, YlOrRd
         /// </summary>
-        Sequential_Multi
+        Sequential_Multi,
+        /// <summary>
+        /// Used for distinct coloring
+        /// Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3
+        /// </summary>
+        Categorical
     }
 
     /// <summary>
@@ -45,18 +45,6 @@ namespace CPSC683DataLibrary
         /// </summary>
         public static Dictionary<string, uint[][]>[] colorList = new Dictionary<string, uint[][]>[]
         {
-            new Dictionary<string, uint[][]>
-            {
-                { "Accent", new uint[][] { new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f,0Xbf5b17}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f,0Xbf5b17,0X666666}, } },
-                { "Dark2", new uint[][] { new uint[] {0X1b9e77,0Xd95f02,0X7570b3}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02,0Xa6761d}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02,0Xa6761d,0X666666}, } },
-                { "Paired", new uint[][] { new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a,0Xffff99}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a,0Xffff99,0Xb15928}, } },
-                { "Pastel1", new uint[][] { new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd,0Xfddaec}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd,0Xfddaec,0Xf2f2f2}, } },
-                { "Pastel2", new uint[][] { new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae,0Xf1e2cc}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae,0Xf1e2cc,0Xcccccc }, } },
-                { "Set1", new uint[][] { new uint[] {0Xe41a1c,0X377eb8,0X4daf4a}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628,0Xf781bf}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628,0Xf781bf,0X999999 }, } },
-                { "Set2", new uint[][] { new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f,0Xe5c494}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f,0Xe5c494,0Xb3b3b3}, } },
-                { "Set3", new uint[][] {new uint[] {0X8dd3c7,0Xffffb3,0Xbebada}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd,0Xccebc5}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd,0Xccebc5,0Xffed6f }, } }
-            },
-
             new Dictionary<string, uint[][]>
             {
                 { "BrBG", new uint[][] { new uint[] {0Xd8b365,0Xf5f5f5,0X5ab4ac}, new uint[] {0Xa6611a,0Xdfc27d,0X80cdc1,0X018571}, new uint[] {0Xa6611a,0Xdfc27d,0Xf5f5f5,0X80cdc1,0X018571}, new uint[] {0X8c510a,0Xd8b365,0Xf6e8c3,0Xc7eae5,0X5ab4ac,0X01665e}, new uint[] {0X8c510a,0Xd8b365,0Xf6e8c3,0Xf5f5f5,0Xc7eae5,0X5ab4ac,0X01665e}, new uint[] {0X8c510a,0Xbf812d,0Xdfc27d,0Xf6e8c3,0Xc7eae5,0X80cdc1,0X35978f,0X01665e}, new uint[] {0X8c510a,0Xbf812d,0Xdfc27d,0Xf6e8c3,0Xf5f5f5,0Xc7eae5,0X80cdc1,0X35978f,0X01665e}, new uint[] {0X543005,0X8c510a,0Xbf812d,0Xdfc27d,0Xf6e8c3,0Xc7eae5,0X80cdc1,0X35978f,0X01665e,0X003c30}, new uint[] {0X543005,0X8c510a,0Xbf812d,0Xdfc27d,0Xf6e8c3,0Xf5f5f5,0Xc7eae5,0X80cdc1,0X35978f,0X01665e,0X003c30}, } },
@@ -94,6 +82,18 @@ namespace CPSC683DataLibrary
                 { "YlGn", new uint[][] { new uint[] {0Xf7fcb9,0Xaddd8e,0X31a354},new uint[] {0Xffffcc,0Xc2e699,0X78c679,0X238443},new uint[] {0Xffffcc,0Xc2e699, 0X78c679, 0X31a354,0X006837},new uint[] {0Xffffcc,0Xd9f0a3,0Xaddd8e,0X78c679,0X31a354,0X006837},new uint[] {0Xffffcc,0Xd9f0a3,0Xaddd8e,0X78c679,0X41ab5d,0X238443,0X005a32},new uint[] {0Xffffe5,0Xf7fcb9,0Xd9f0a3,0Xaddd8e,0X78c679,0X41ab5d,0X238443,0X005a32},new uint[] {0Xffffe5,0Xf7fcb9,0Xd9f0a3,0Xaddd8e,0X78c679,0X41ab5d,0X238443,0X006837,0X004529}}},
                 { "YlOrBr", new uint[][] { new uint[] {0Xfff7bc,0Xfec44f,0Xd95f0e},new uint[] {0Xffffd4,0Xfed98e,0Xfe9929,0Xcc4c02},new uint[] {0Xffffd4,0Xfed98e,0Xfe9929,0Xd95f0e,0X993404},new uint[] {0Xffffd4,0Xfee391,0Xfec44f,0Xfe9929,0Xd95f0e,0X993404},new uint[] {0Xffffd4,0Xfee391,0Xfec44f,0Xfe9929,0Xec7014,0Xcc4c02,0X8c2d04},new uint[] {0Xffffe5,0Xfff7bc,0Xfee391,0Xfec44f,0Xfe9929,0Xec7014,0Xcc4c02,0X8c2d04},new uint[] {0Xffffe5,0Xfff7bc,0Xfee391,0Xfec44f,0Xfe9929,0Xec7014,0Xcc4c02,0X993404,0X662506}}},
                 { "YlOrRd", new uint[][] { new uint[] {0Xffeda0,0Xfeb24c,0Xf03b20},new uint[] {0Xffffb2,0Xfecc5c,0Xfd8d3c,0Xe31a1c},new uint[] {0Xffffb2,0Xfecc5c,0Xfd8d3c,0Xf03b20,0Xbd0026},new uint[] {0Xffffb2,0Xfed976,0Xfeb24c,0Xfd8d3c,0Xf03b20,0Xbd0026},new uint[] {0Xffffb2,0Xfed976,0Xfeb24c,0Xfd8d3c,0Xfc4e2a,0Xe31a1c,0Xb10026},new uint[] {0Xffffcc,0Xffeda0,0Xfed976,0Xfeb24c,0Xfd8d3c,0Xfc4e2a,0Xe31a1c,0Xb10026},new uint[] {0Xffffcc,0Xffeda0,0Xfed976,0Xfeb24c,0Xfd8d3c,0Xfc4e2a,0Xe31a1c,0Xbd0026,0X800026}}},
+            },
+
+            new Dictionary<string, uint[][]>
+            {
+                { "Accent", new uint[][] { new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f,0Xbf5b17}, new uint[] {0X7fc97f,0Xbeaed4,0Xfdc086,0Xffff99,0X386cb0,0Xf0027f,0Xbf5b17,0X666666}, } },
+                { "Dark2", new uint[][] { new uint[] {0X1b9e77,0Xd95f02,0X7570b3}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02,0Xa6761d}, new uint[] {0X1b9e77,0Xd95f02,0X7570b3,0Xe7298a,0X66a61e,0Xe6ab02,0Xa6761d,0X666666}, } },
+                { "Paired", new uint[][] { new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a,0Xffff99}, new uint[] {0Xa6cee3,0X1f78b4,0Xb2df8a,0X33a02c,0Xfb9a99,0Xe31a1c,0Xfdbf6f,0Xff7f00,0Xcab2d6,0X6a3d9a,0Xffff99,0Xb15928}, } },
+                { "Pastel1", new uint[][] { new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd,0Xfddaec}, new uint[] {0Xfbb4ae,0Xb3cde3,0Xccebc5,0Xdecbe4,0Xfed9a6,0Xffffcc,0Xe5d8bd,0Xfddaec,0Xf2f2f2}, } },
+                { "Pastel2", new uint[][] { new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae,0Xf1e2cc}, new uint[] {0Xb3e2cd,0Xfdcdac,0Xcbd5e8,0Xf4cae4,0Xe6f5c9,0Xfff2ae,0Xf1e2cc,0Xcccccc }, } },
+                { "Set1", new uint[][] { new uint[] {0Xe41a1c,0X377eb8,0X4daf4a}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628,0Xf781bf}, new uint[] {0Xe41a1c,0X377eb8,0X4daf4a,0X984ea3,0Xff7f00,0Xffff33,0Xa65628,0Xf781bf,0X999999 }, } },
+                { "Set2", new uint[][] { new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f,0Xe5c494}, new uint[] {0X66c2a5,0Xfc8d62,0X8da0cb,0Xe78ac3,0Xa6d854,0Xffd92f,0Xe5c494,0Xb3b3b3}, } },
+                { "Set3", new uint[][] {new uint[] {0X8dd3c7,0Xffffb3,0Xbebada}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd,0Xccebc5}, new uint[] {0X8dd3c7,0Xffffb3,0Xbebada,0Xfb8072,0X80b1d3,0Xfdb462,0Xb3de69,0Xfccde5,0Xd9d9d9,0Xbc80bd,0Xccebc5,0Xffed6f }, } }
             }
     };
 
