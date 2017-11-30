@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLibrary;
+using UnityEngine;
 
 namespace DataLibrary
 {
@@ -11,12 +12,13 @@ namespace DataLibrary
     {
         GreaterThan,
         LessThan,
-        EqualTo
+        EqualTo,
+        NotEqualTo
     }
 
     public class FilterObject
     {
-        FilterTerm filterTerm;
+        public FilterTerm filterTerm;
         public string valueToFilterOn;
 
         public string stringFilterTerm
@@ -34,6 +36,7 @@ namespace DataLibrary
             switch (filter)
             {
                 case FilterTerm.EqualTo:
+                case FilterTerm.NotEqualTo:
                     f = "=";
                     break;
                 case FilterTerm.GreaterThan:
@@ -93,22 +96,29 @@ namespace DataLibrary
             dictionary[split[0]].Add(fo);
         }
 
-        public static string ConvertFilterDictionaryToString(string orAnd)
+        public static string ConvertFilterDictionaryToString(FilterTerm filter)
         {
             string firstKey = dictionary.Keys.ToArray()[0];
-
-            if (dictionary[firstKey].Count == 0)
-                return "";
-
-            StringBuilder sb = new StringBuilder(HelperFunctions.FilterByString(firstKey, dictionary[firstKey][0].stringFilterTerm, dictionary[firstKey][0].valueToFilterOn));
+            StringBuilder sb = new StringBuilder();
 
             foreach (string s in dictionary.Keys)
             {
-                foreach (FilterObject j in dictionary[s].Skip(1))
-                    sb.Append(" " + orAnd + " " + HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
+                foreach (FilterObject j in dictionary[s])
+                {
+                    if (j.filterTerm == filter)
+                    {
+                        if (sb.Length > 0)
+                            sb.Append(" or ");
+                        
+                        sb.Append(HelperFunctions.FilterByString(s, j.stringFilterTerm, j.valueToFilterOn));
+                    }
+                }
             }
-
-            return sb.ToString();
+            
+            if (sb.Length == 0)
+                return null;
+            else
+                return sb.ToString();
         }
 
         public static void SetFilterObjectsByColumn(string columnName, List<FilterObject> fol)

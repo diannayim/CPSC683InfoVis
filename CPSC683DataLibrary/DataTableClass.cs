@@ -22,6 +22,45 @@ namespace DataLibrary
         /// Column Names for dataset
         /// </summary>
         public List<string> columnNames = new List<string>();
+        public int numOfEntries
+        {
+            get
+            {
+                return originalTable.Rows.Count;
+            }
+        }
+
+        public List<string> dimensionNames
+        {
+            get
+            {
+                List<string> t = new List<string>();
+
+                foreach(DataColumn c in originalTable.Columns)
+                {
+                    if (c.DataType == typeof(string))
+                        t.Add(c.ColumnName);
+                }
+
+                return t;
+            }
+        }
+
+        public List<string> measureNames
+        {
+            get
+            {
+                List<string> t = new List<string>();
+
+                foreach (DataColumn c in originalTable.Columns)
+                {
+                    if (c.DataType == typeof(float))
+                        t.Add(c.ColumnName);
+                }
+
+                return t;
+            }
+        }
 
         #region Creation
 
@@ -150,18 +189,21 @@ namespace DataLibrary
 
         public string GetRowsWithFilter(string filter)
         {
+            if (filter == null)
+                return "";
+
             var filteredRows = originalTable.Select(filter);
             return ReturnJsonTable(filteredRows.CopyToDataTable());
         }
-
-        public string GetRowsWithoutFilter(string filter)
+        
+        public string GetIDWithFilter(string filter)
         {
-            var filteredRows = originalTable.Select(filter.Replace("=", "<>"));
+            if (filter == null)
+                return "";
 
-            if (filteredRows.Length == 0)
-                return null;
-
-            return ReturnJsonTable(filteredRows.CopyToDataTable());
+            DataTable filteredRows = originalTable.Select(filter).CopyToDataTable();
+            DataTable dt = new DataView(filteredRows).ToTable(false, new string[] { "id" });
+            return ReturnJsonTable(dt);
         }
 
         public float GetAverageValue(string columnName, string filter)
