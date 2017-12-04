@@ -123,7 +123,7 @@ namespace DataLibrary
 
         public static void SetFilterObjectsByColumn(string columnName, List<FilterObject> fol)
         {
-            dictionary[columnName.Replace(' ', '_')] = fol;
+            dictionary[columnName] = fol;
         }
 
         public static bool ReturnAllFilterValuesForColumn(string columnName, out List<string> list)

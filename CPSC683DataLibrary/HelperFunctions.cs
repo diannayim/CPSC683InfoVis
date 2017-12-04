@@ -48,7 +48,7 @@ namespace DataLibrary
 
         public static string FilterByString(string columnName, string operation, string columnValue)
         {
-            return columnName.Replace(' ', '_') + " " + operation + " \'" + columnValue + "\'";
+            return columnName + " " + operation + " \'" + columnValue + "\'";
         }
     }
 }

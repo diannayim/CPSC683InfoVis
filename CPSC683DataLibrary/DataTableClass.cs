@@ -62,6 +62,23 @@ namespace DataLibrary
             }
         }
 
+        public List<string> booleanNames
+        {
+            get
+            {
+                List<string> t = new List<string>();
+
+                foreach (DataColumn c in originalTable.Columns)
+                {
+                    if (c.DataType == typeof(bool))
+                        t.Add(c.ColumnName);
+                }
+
+                return t;
+            }
+        }
+
+
         #region Creation
 
         /// <summary>
@@ -86,35 +103,35 @@ namespace DataLibrary
                     foreach (string s in split)
                     {
                         dc = new DataColumn();
-                        dc.ColumnName = s.Replace(' ', '_');
+                        dc.ColumnName = s;
                         columnNames.Add(s);
 
                         switch (s)
                         {
-                            case "User country":
-                            case "Period of stay":
-                            case "Hotel name":
-                            case "User continent":
-                            case "Review month":
-                            case "Review weekday":
-                            case "Traveler type":
+                            case "User_country":
+                            case "Period_of_stay":
+                            case "Hotel_name":
+                            case "User_continent":
+                            case "Review_month":
+                            case "Review_weekday":
+                            case "Traveler_type":
                                 dc.DataType = typeof(string);
                                 break;
-                            case "Nr. reviews":
-                            case "Nr. hotel reviews":
-                            case "Helpful votes":
+                            case "Nr._reviews":
+                            case "Nr._hotel_reviews":
+                            case "Helpful_votes":
                             case "Score":
-                            case "Hotel stars":
-                            case "Nr. rooms":
-                            case "Member years":
+                            case "Hotel_stars":
+                            case "Nr._rooms":
+                            case "Member_years":
                                 dc.DataType = typeof(float);
                                 break;
                             case "Pool":
                             case "Gym":
-                            case "Tennis court":
+                            case "Tennis_court":
                             case "Spa":
                             case "Casino":
-                            case "Free internet":
+                            case "Free_internet":
                                 dc.DataType = typeof(bool);
                                 break;
                             default:
@@ -208,24 +225,24 @@ namespace DataLibrary
 
         public float GetAverageValue(string columnName, string filter)
         {
-            return (float)originalTable.Compute("AVG([" + columnName.Replace(' ', '_') + "])", filter);
+            return (float)originalTable.Compute("AVG([" + columnName + "])", filter);
         }
 
         public List<string> GetUniqueValuesForColumn(string columnName)
         {
             DataView view = new DataView(originalTable);
-            DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
+            DataTable distinctValues = view.ToTable(true, columnName);
 
-            return distinctValues.AsEnumerable().Select(r => r[columnName.Replace(' ', '_')].ToString()).ToList();
+            return distinctValues.AsEnumerable().Select(r => r[columnName].ToString()).ToList();
         }
 
         public List<string> GetUniqueValuesForColumn(string columnName, string filter)
         {
             var filteredRows = originalTable.Select(filter);
             DataView view = new DataView(filteredRows.CopyToDataTable());
-            DataTable distinctValues = view.ToTable(true, columnName.Replace(' ', '_'));
+            DataTable distinctValues = view.ToTable(true, columnName);
 
-            return distinctValues.AsEnumerable().Select(r => r[columnName.Replace(' ', '_')].ToString()).ToList();
+            return distinctValues.AsEnumerable().Select(r => r[columnName].ToString()).ToList();
         }
     }
 }
