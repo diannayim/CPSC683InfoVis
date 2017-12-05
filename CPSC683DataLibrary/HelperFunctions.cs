@@ -8,17 +8,18 @@ namespace DataLibrary
 {
     public static class HelperFunctions
     {
-        public static float[] GetXYCoordinate(int numberOfElements, float distanceBetweenObjects, float[] current)
+        public static float[] GetXYCoordinate(int numberOfElements, float[] distanceBetweenObjects, float[] current, float yMin = 0)
         {
             float factor = (float)Math.Round(Math.Pow((float)numberOfElements, 1f / 2f));
+
             float x = current[0], y = current[1];
 
-            x += distanceBetweenObjects + 0.1f;
+            y += distanceBetweenObjects[1] + 0.1f;
 
-            if (x / distanceBetweenObjects >= factor)
+            if ((y - yMin) / distanceBetweenObjects[1] >= factor)
             {
-                x = 0;
-                y += distanceBetweenObjects + 0.1f;
+                y = yMin;
+                x += distanceBetweenObjects[0] + 0.1f;
             }
 
             return new float[] { x, y, 0 };
@@ -29,17 +30,17 @@ namespace DataLibrary
             float factor = (float)Math.Round(Math.Pow((float)numberOfElements, 1f / 3f));
             float x = current[0], y = current[1], z = current[2];
 
-            x += distanceBetweenObjects + 0.1f;
+            y += distanceBetweenObjects + 0.1f;
 
-            if (x / distanceBetweenObjects >= factor)
+            if (y / distanceBetweenObjects >= factor)
             {
-                x = 0;
-                z += distanceBetweenObjects + 0.1f;
+                y = 0;
+                x += distanceBetweenObjects + 0.1f;
 
-                if (z / distanceBetweenObjects >= factor)
+                if (x / distanceBetweenObjects >= factor)
                 {
-                    z = 0;
-                    y += distanceBetweenObjects + 0.1f;
+                    x = 0;
+                    z += distanceBetweenObjects + 0.1f;
                 }
             }
 

@@ -58,6 +58,8 @@ namespace DataLibrary
                         t.Add(c.ColumnName);
                 }
 
+                t.Add("Score");
+                t.Add("Hotel_stars");
                 return t;
             }
         }
@@ -115,13 +117,13 @@ namespace DataLibrary
                             case "Review_month":
                             case "Review_weekday":
                             case "Traveler_type":
+                            case "Score":
+                            case "Hotel_stars":
                                 dc.DataType = typeof(string);
                                 break;
                             case "Nr._reviews":
                             case "Nr._hotel_reviews":
                             case "Helpful_votes":
-                            case "Score":
-                            case "Hotel_stars":
                             case "Nr._rooms":
                             case "Member_years":
                                 dc.DataType = typeof(float);
